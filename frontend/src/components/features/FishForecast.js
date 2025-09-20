@@ -327,68 +327,73 @@ const FishForecast = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">AI Fish Forecasting</h2>
-          <p className="text-gray-600 mt-1">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">AI Fish Forecasting</h2>
+          <p className="text-xs sm:text-sm text-gray-600 mt-1">
             AI-powered environmental analysis to predict the best fishing spots
           </p>
         </div>
-        <div className="flex gap-2 mt-4 sm:mt-0">
+        <div className="flex gap-2 mt-3 sm:mt-0">
           <Button 
             variant="outline" 
             onClick={getCurrentLocation}
             disabled={loading}
+            className="text-xs sm:text-sm py-1 sm:py-2 h-8 sm:h-10"
           >
-            <MapPin className="w-4 h-4 mr-2" />
+            <MapPin className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
             Use My Location
           </Button>
-          <Button onClick={handleRefresh} disabled={loading}>
-            <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+          <Button 
+            onClick={handleRefresh} 
+            disabled={loading}
+            className="text-xs sm:text-sm py-1 sm:py-2 h-8 sm:h-10"
+          >
+            <RefreshCw className={`w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 ${loading ? 'animate-spin' : ''}`} />
             Refresh
           </Button>
         </div>
       </div>
 
       {loading && (
-        <Alert>
-          <Loader2 className="h-4 w-4 animate-spin" />
-          <AlertDescription>
+        <Alert className="p-2 sm:p-4">
+          <Loader2 className="h-3 w-3 sm:h-4 sm:w-4 animate-spin" />
+          <AlertDescription className="text-xs sm:text-sm">
             Analyzing environmental conditions and predicting fishing zones...
           </AlertDescription>
         </Alert>
       )}
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList>
-          <TabsTrigger value="zones">Best Zones</TabsTrigger>
-          <TabsTrigger value="map">Interactive Map</TabsTrigger>
-          <TabsTrigger value="environmental">Environmental Data</TabsTrigger>
-          <TabsTrigger value="species">Species Forecast</TabsTrigger>
+        <TabsList className="grid grid-cols-2 sm:grid-cols-4 w-full">
+          <TabsTrigger value="zones" className="text-xs sm:text-sm">Best Zones</TabsTrigger>
+          <TabsTrigger value="map" className="text-xs sm:text-sm">Interactive Map</TabsTrigger>
+          <TabsTrigger value="environmental" className="text-xs sm:text-sm">Environmental</TabsTrigger>
+          <TabsTrigger value="species" className="text-xs sm:text-sm">Species</TabsTrigger>
         </TabsList>
 
         <TabsContent value="zones" className="space-y-4">
           {forecastData && (
             <>
               <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Target className="w-5 h-5 text-sky-600" />
+                <CardHeader className="p-3 sm:p-6">
+                  <CardTitle className="flex items-center gap-2 text-sm sm:text-base">
+                    <Target className="w-4 h-4 sm:w-5 sm:h-5 text-sky-600" />
                     Current Location
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-xs sm:text-sm">
                     Your position: {forecastData.user_location.lat.toFixed(4)}°N, {forecastData.user_location.lon.toFixed(4)}°E
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-2 gap-4 text-sm">
+                <CardContent className="p-3 sm:p-6 pt-0 sm:pt-0">
+                  <div className="grid grid-cols-2 gap-2 sm:gap-4 text-xs sm:text-sm">
                     <div>
-                      <Label className="text-gray-500">Radius Analyzed</Label>
+                      <Label className="text-gray-500 text-xs">Radius Analyzed</Label>
                       <p className="font-medium">{forecastData.prediction_details.radius_km} km</p>
                     </div>
                     <div>
-                      <Label className="text-gray-500">Last Updated</Label>
+                      <Label className="text-gray-500 text-xs">Last Updated</Label>
                       <p className="font-medium">
                         {new Date(forecastData.prediction_details.timestamp).toLocaleTimeString()}
                       </p>
@@ -400,45 +405,45 @@ const FishForecast = () => {
               <div className="grid gap-4">
                 {forecastData.best_zones.map((zone, index) => (
                   <Card key={index} className="hover:shadow-lg transition-shadow">
-                    <CardHeader>
+                    <CardHeader className="p-3 sm:p-6">
                       <div className="flex items-center justify-between">
-                        <CardTitle className="text-lg">
+                        <CardTitle className="text-sm sm:text-lg">
                           Zone {index + 1}
                         </CardTitle>
-                        <Badge className={getScoreColor(zone.score)}>
+                        <Badge className={`text-xs sm:text-sm px-1 sm:px-2 py-0 sm:py-1 ${getScoreColor(zone.score)}`}>
                           {getScoreLabel(zone.score)} ({Math.round(zone.score * 100)}%)
                         </Badge>
                       </div>
-                      <CardDescription>
+                      <CardDescription className="text-xs sm:text-sm">
                         {zone.lat.toFixed(4)}°N, {zone.lon.toFixed(4)}°E
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
                         <div className="text-center">
-                          <Thermometer className="w-6 h-6 mx-auto mb-2 text-red-500" />
-                          <Label className="text-xs text-gray-500">Sea Temperature</Label>
-                          <p className="text-sm font-medium">{Math.round(zone.sst * 100)}%</p>
+                          <Thermometer className="w-5 h-5 sm:w-6 sm:h-6 mx-auto mb-1 sm:mb-2 text-red-500" />
+                          <Label className="text-xs text-gray-500">Sea Temp</Label>
+                          <p className="text-xs sm:text-sm font-medium">{Math.round(zone.sst * 100)}%</p>
                         </div>
                         <div className="text-center">
-                          <div className="w-6 h-6 mx-auto mb-2 bg-green-500 rounded-full"></div>
+                          <div className="w-5 h-5 sm:w-6 sm:h-6 mx-auto mb-1 sm:mb-2 bg-green-500 rounded-full"></div>
                           <Label className="text-xs text-gray-500">Chlorophyll</Label>
-                          <p className="text-sm font-medium">{Math.round(zone.chlorophyll * 100)}%</p>
+                          <p className="text-xs sm:text-sm font-medium">{Math.round(zone.chlorophyll * 100)}%</p>
                         </div>
                         <div className="text-center">
-                          <Wind className="w-6 h-6 mx-auto mb-2 text-blue-500" />
-                          <Label className="text-xs text-gray-500">Wind Conditions</Label>
-                          <p className="text-sm font-medium">{Math.round(zone.wind * 100)}%</p>
+                          <Wind className="w-5 h-5 sm:w-6 sm:h-6 mx-auto mb-1 sm:mb-2 text-blue-500" />
+                          <Label className="text-xs text-gray-500">Wind</Label>
+                          <p className="text-xs sm:text-sm font-medium">{Math.round(zone.wind * 100)}%</p>
                         </div>
                         <div className="text-center">
-                          <Waves className="w-6 h-6 mx-auto mb-2 text-cyan-500" />
-                          <Label className="text-xs text-gray-500">Ocean Current</Label>
-                          <p className="text-sm font-medium">{Math.round(zone.current * 100)}%</p>
+                          <Waves className="w-5 h-5 sm:w-6 sm:h-6 mx-auto mb-1 sm:mb-2 text-cyan-500" />
+                          <Label className="text-xs text-gray-500">Current</Label>
+                          <p className="text-xs sm:text-sm font-medium">{Math.round(zone.current * 100)}%</p>
                         </div>
                       </div>
                       
-                      <div className="mt-4 pt-4 border-t">
-                        <p className="text-sm text-gray-600">
+                      <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t">
+                        <p className="text-xs sm:text-sm text-gray-600">
                           <strong>Distance:</strong> {(Math.sqrt(
                             Math.pow(zone.lat - forecastData.user_location.lat, 2) + 
                             Math.pow(zone.lon - forecastData.user_location.lon, 2)

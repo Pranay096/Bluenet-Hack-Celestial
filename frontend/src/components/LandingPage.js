@@ -21,7 +21,8 @@ import {
   AlertTriangle,
   MessageSquare,
   ChevronRight,
-  Play
+  Play,
+  Menu
 } from 'lucide-react';
 
 const LandingPage = ({ onLogin }) => {
@@ -158,31 +159,31 @@ const LandingPage = ({ onLogin }) => {
         
         <div className="relative">
           {/* Navigation */}
-          <nav className="flex items-center justify-between p-6 lg:px-8">
+          <nav className="flex items-center justify-between p-4 sm:p-6 lg:px-8">
             <div className="flex items-center gap-2">
-              <Waves className="h-8 w-8 text-sky-600" />
-              <span className="text-2xl font-bold text-gray-900">BlueNet</span>
+              <Waves className="h-7 w-7 sm:h-8 sm:w-8 text-sky-600" />
+              <span className="text-xl sm:text-2xl font-bold text-gray-900">BlueNet</span>
             </div>
             
-            <div className="flex items-center gap-4">
-              <div className="hidden md:flex items-center gap-8">
+            <div className="flex items-center gap-2 sm:gap-4">
+              <div className="hidden md:flex items-center gap-4 lg:gap-8">
                 <a href="#features" className="text-gray-600 hover:text-sky-600 font-medium transition-colors">{t('features') || 'Features'}</a>
                 <a href="#how-it-works" className="text-gray-600 hover:text-sky-600 font-medium transition-colors">How it Works</a>
                 <a href="#contact" className="text-gray-600 hover:text-sky-600 font-medium transition-colors">Contact</a>
               </div>
               
               <LanguageSelector onLanguageChange={(lang) => console.log('Language changed to:', lang)} />
+              
+              {/* Mobile menu button */}
+              <Button variant="ghost" size="icon" className="md:hidden">
+                <Menu className="h-5 w-5" />
+              </Button>
             </div>
             
             <Dialog open={showAuthModal} onOpenChange={setShowAuthModal}>
               <DialogTrigger asChild>
-                <Button className="bg-sky-600 hover:bg-sky-700">
+                <Button className="hidden md:flex bg-sky-600 hover:bg-sky-700">
                   {t('tryDashboard') || 'Get Started'}
-                </Button>
-              </DialogTrigger>
-              <DialogTrigger asChild>
-                <Button className="bg-sky-600 hover:bg-sky-700">
-                  Get Started
                 </Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-md">
@@ -270,34 +271,34 @@ const LandingPage = ({ onLogin }) => {
           </nav>
           
           {/* Hero Content */}
-          <div className="px-6 py-24 lg:px-8">
+          <div className="px-4 py-12 sm:px-6 sm:py-16 md:py-20 lg:px-8 lg:py-24">
             <div className="mx-auto max-w-4xl text-center">
-              <Badge variant="outline" className="mb-8 px-4 py-2 text-sm font-medium border-sky-200 text-sky-700">
+              <Badge variant="outline" className="mb-4 sm:mb-6 lg:mb-8 px-3 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium border-sky-200 text-sky-700">
                 🌊 Enhancing Coastal Fishing with AI & Technology
               </Badge>
               
-              <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl mb-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 mb-4 sm:mb-6">
                 Fish Smarter. Stay Safer.{' '}
                 <span className="text-sky-600">Earn More.</span>
               </h1>
               
-              <p className="text-lg leading-8 text-gray-600 mb-12 max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg leading-7 sm:leading-8 text-gray-600 mb-8 sm:mb-10 lg:mb-12 max-w-2xl mx-auto">
                 BlueNet combines artificial intelligence, real-time data, and local expertise to revolutionize 
                 coastal fishing practices in India. Join thousands of fishermen already using smart technology 
                 for better catches and safer journeys.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
                 <Button 
                   size="lg" 
-                  className="bg-sky-600 hover:bg-sky-700"
+                  className="bg-sky-600 hover:bg-sky-700 w-full sm:w-auto"
                   onClick={() => setShowAuthModal(true)}
                 >
-                  <Play className="w-5 h-5 mr-2" />
+                  <Play className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                   Try the Dashboard
                 </Button>
-                <Button size="lg" variant="outline" className="border-sky-200 text-sky-700 hover:bg-sky-50">
-                  <Fish className="w-5 h-5 mr-2" />
+                <Button size="lg" variant="outline" className="border-sky-200 text-sky-700 hover:bg-sky-50 w-full sm:w-auto">
+                  <Fish className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                   Watch Demo
                 </Button>
               </div>

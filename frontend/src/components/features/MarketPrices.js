@@ -115,81 +115,89 @@ const MarketPrices = () => {
   const ports = ['Mumbai', 'Chennai', 'Kochi', 'Paradip', 'Visakhapatnam', 'Mangalore'];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Market Price Intelligence</h2>
-          <p className="text-gray-600 mt-1">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Market Price Intelligence</h2>
+          <p className="text-xs sm:text-sm text-gray-600 mt-1">
             Real-time mandi prices with ML-powered recommendations for maximum profit
           </p>
         </div>
-        <Button onClick={handleSearch} disabled={marketData.loading}>
-          <RefreshCw className={`w-4 h-4 mr-2 ${marketData.loading ? 'animate-spin' : ''}`} />
+        <Button 
+          onClick={handleSearch} 
+          disabled={marketData.loading}
+          className="text-xs sm:text-sm py-1 sm:py-2 h-8 sm:h-10 mt-3 sm:mt-0"
+        >
+          <RefreshCw className={`w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 ${marketData.loading ? 'animate-spin' : ''}`} />
           Refresh Prices
         </Button>
       </div>
 
       {/* Search Form */}
       <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Search className="w-5 h-5 text-sky-600" />
+        <CardHeader className="p-3 sm:p-6">
+          <CardTitle className="flex items-center gap-2 text-sm sm:text-base">
+            <Search className="w-4 h-4 sm:w-5 sm:h-5 text-sky-600" />
             Find Best Mandi Prices
           </CardTitle>
-          <CardDescription>
+          <CardDescription className="text-xs sm:text-sm">
             Get AI-powered recommendations for best market prices based on your catch
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="port">Your Port</Label>
+        <CardContent className="p-3 sm:p-6 pt-0 sm:pt-0">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+            <div className="space-y-1 sm:space-y-2">
+              <Label htmlFor="port" className="text-xs sm:text-sm">Your Port</Label>
               <Select value={searchForm.port} onValueChange={(value) => handleFormChange('port', value)}>
-                <SelectTrigger>
+                <SelectTrigger className="h-8 sm:h-10 text-xs sm:text-sm">
                   <SelectValue placeholder="Select port" />
                 </SelectTrigger>
                 <SelectContent>
                   {ports.map(port => (
-                    <SelectItem key={port} value={port}>{port}</SelectItem>
+                    <SelectItem key={port} value={port} className="text-xs sm:text-sm">{port}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
             
-            <div className="space-y-2">
-              <Label htmlFor="fishType">Fish Type</Label>
+            <div className="space-y-1 sm:space-y-2">
+              <Label htmlFor="fishType" className="text-xs sm:text-sm">Fish Type</Label>
               <Select value={searchForm.fishType} onValueChange={(value) => handleFormChange('fishType', value)}>
-                <SelectTrigger>
+                <SelectTrigger className="h-8 sm:h-10 text-xs sm:text-sm">
                   <SelectValue placeholder="Select fish type" />
                 </SelectTrigger>
                 <SelectContent>
                   {fishTypes.map(fish => (
-                    <SelectItem key={fish} value={fish} className="capitalize">{fish}</SelectItem>
+                    <SelectItem key={fish} value={fish} className="capitalize text-xs sm:text-sm">{fish}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
             
-            <div className="space-y-2">
-              <Label htmlFor="fishSize">Fish Size</Label>
+            <div className="space-y-1 sm:space-y-2">
+              <Label htmlFor="fishSize" className="text-xs sm:text-sm">Fish Size</Label>
               <Select value={searchForm.fishSize} onValueChange={(value) => handleFormChange('fishSize', value)}>
-                <SelectTrigger>
+                <SelectTrigger className="h-8 sm:h-10 text-xs sm:text-sm">
                   <SelectValue placeholder="Select size" />
                 </SelectTrigger>
                 <SelectContent>
                   {fishSizes.map(size => (
-                    <SelectItem key={size} value={size} className="capitalize">{size}</SelectItem>
+                    <SelectItem key={size} value={size} className="capitalize text-xs sm:text-sm">{size}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
             
             <div className="flex items-end">
-              <Button onClick={handleSearch} className="w-full" disabled={marketData.loading}>
+              <Button 
+                onClick={handleSearch} 
+                className="w-full text-xs sm:text-sm py-1 sm:py-2 h-8 sm:h-10" 
+                disabled={marketData.loading}
+              >
                 {marketData.loading ? (
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  <Loader2 className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 animate-spin" />
                 ) : (
-                  <Search className="w-4 h-4 mr-2" />
+                  <Search className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                 )}
                 Find Best Prices
               </Button>
@@ -199,10 +207,10 @@ const MarketPrices = () => {
       </Card>
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList>
-          <TabsTrigger value="recommendation">Best Recommendation</TabsTrigger>
-          <TabsTrigger value="markets">Top Markets</TabsTrigger>
-          <TabsTrigger value="trends">Price Trends</TabsTrigger>
+        <TabsList className="grid grid-cols-3 w-full">
+          <TabsTrigger value="recommendation" className="text-xs sm:text-sm">Best Recommendation</TabsTrigger>
+          <TabsTrigger value="markets" className="text-xs sm:text-sm">Top Markets</TabsTrigger>
+          <TabsTrigger value="trends" className="text-xs sm:text-sm">Price Trends</TabsTrigger>
         </TabsList>
 
         <TabsContent value="recommendation" className="space-y-4">
@@ -210,51 +218,51 @@ const MarketPrices = () => {
             <>
               {/* Best Mandi Recommendation */}
               <Card className="border-green-200 bg-green-50">
-                <CardHeader>
+                <CardHeader className="p-3 sm:p-6">
                   <div className="flex items-center justify-between">
-                    <CardTitle className="text-xl text-green-800">
+                    <CardTitle className="text-lg sm:text-xl text-green-800">
                       🏆 Best Mandi Recommendation
                     </CardTitle>
-                    <Badge className="bg-green-100 text-green-800">
+                    <Badge className="bg-green-100 text-green-800 text-xs sm:text-sm px-1 sm:px-2 py-0 sm:py-1">
                       Highest Profit
                     </Badge>
                   </div>
                 </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <CardContent className="p-3 sm:p-6 pt-0 sm:pt-0">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6">
                     <div>
-                      <h3 className="font-semibold text-green-800 mb-2">Market Details</h3>
-                      <p className="text-lg font-bold text-green-900">
+                      <h3 className="font-semibold text-green-800 mb-1 sm:mb-2 text-xs sm:text-sm">Market Details</h3>
+                      <p className="text-base sm:text-lg font-bold text-green-900">
                         {marketData.recommendations.best_mandi.mandi}
                       </p>
-                      <p className="text-green-700">
+                      <p className="text-green-700 text-xs sm:text-sm">
                         {marketData.recommendations.best_mandi.state}
                       </p>
-                      <div className="flex items-center gap-1 mt-2">
-                        <MapPin className="w-4 h-4 text-green-600" />
-                        <span className="text-sm text-green-600">
+                      <div className="flex items-center gap-1 mt-1 sm:mt-2">
+                        <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-green-600" />
+                        <span className="text-xs sm:text-sm text-green-600">
                           {marketData.recommendations.best_mandi.distance_km} km away
                         </span>
                       </div>
                     </div>
                     
                     <div>
-                      <h3 className="font-semibold text-green-800 mb-2">Price Information</h3>
-                      <p className="text-3xl font-bold text-green-900">
+                      <h3 className="font-semibold text-green-800 mb-1 sm:mb-2 text-xs sm:text-sm">Price Information</h3>
+                      <p className="text-xl sm:text-3xl font-bold text-green-900">
                         ₹{marketData.recommendations.best_mandi.price_inr}
                       </p>
-                      <p className="text-green-700">per kg</p>
-                      <div className="flex items-center gap-1 mt-2">
-                        <TrendingUp className="w-4 h-4 text-green-600" />
-                        <span className="text-sm text-green-600">
+                      <p className="text-xs sm:text-sm text-green-700">per kg</p>
+                      <div className="flex items-center gap-1 mt-1 sm:mt-2">
+                        <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-green-600" />
+                        <span className="text-xs sm:text-sm text-green-600">
                           12% above average
                         </span>
                       </div>
                     </div>
                     
                     <div>
-                      <h3 className="font-semibold text-green-800 mb-2">AI Analysis</h3>
-                      <p className="text-sm text-green-700 leading-relaxed">
+                      <h3 className="font-semibold text-green-800 mb-1 sm:mb-2 text-xs sm:text-sm">AI Analysis</h3>
+                      <p className="text-xs sm:text-sm text-green-700 leading-relaxed">
                         {marketData.recommendations.analysis}
                       </p>
                     </div>
@@ -264,19 +272,19 @@ const MarketPrices = () => {
 
               {/* All Options */}
               <Card>
-                <CardHeader>
-                  <CardTitle>All Market Options</CardTitle>
-                  <CardDescription>
+                <CardHeader className="p-3 sm:p-6">
+                  <CardTitle className="text-sm sm:text-base">All Market Options</CardTitle>
+                  <CardDescription className="text-xs sm:text-sm">
                     Compare prices across different mandis for {searchForm.fishType} from {searchForm.port}
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
+                <CardContent className="p-3 sm:p-6 pt-0 sm:pt-0">
+                  <div className="space-y-2 sm:space-y-4">
                     {marketData.recommendations.all_options.map((option, index) => (
-                      <div key={index} className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50">
-                        <div className="flex items-center space-x-4">
+                      <div key={index} className="flex items-center justify-between p-2 sm:p-4 border rounded-lg hover:bg-gray-50">
+                        <div className="flex items-center space-x-2 sm:space-x-4">
                           <div className="flex-shrink-0">
-                            <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                            <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center ${
                               index === 0 ? 'bg-green-100 text-green-600' :
                               index === 1 ? 'bg-blue-100 text-blue-600' :
                               'bg-gray-100 text-gray-600'
@@ -307,31 +315,31 @@ const MarketPrices = () => {
           )}
         </TabsContent>
 
-        <TabsContent value="markets" className="space-y-4">
-          <div className="grid gap-4">
+        <TabsContent value="markets" className="space-y-2 sm:space-y-4">
+          <div className="grid gap-2 sm:gap-4">
             {marketData.topMarkets.map((market, index) => (
               <Card key={index} className="hover:shadow-md transition-shadow">
-                <CardContent className="pt-6">
+                <CardContent className="p-3 sm:p-6">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-sky-100 rounded-lg flex items-center justify-center">
-                        <Fish className="w-6 h-6 text-sky-600" />
+                    <div className="flex items-center space-x-2 sm:space-x-4">
+                      <div className="w-8 h-8 sm:w-12 sm:h-12 bg-sky-100 rounded-lg flex items-center justify-center">
+                        <Fish className="w-4 h-4 sm:w-6 sm:h-6 text-sky-600" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-gray-900">{market.name}</h3>
-                        <p className="text-sm text-gray-500">{market.location}</p>
+                        <h3 className="font-semibold text-gray-900 text-xs sm:text-base">{market.name}</h3>
+                        <p className="text-xs sm:text-sm text-gray-500">{market.location}</p>
                       </div>
                     </div>
                     
                     <div className="text-right">
-                      <p className="text-xl font-bold text-gray-900">₹{market.avgPrice}</p>
+                      <p className="text-base sm:text-xl font-bold text-gray-900">₹{market.avgPrice}</p>
                       <div className="flex items-center gap-1">
                         {market.trend === 'up' ? (
-                          <ArrowUpRight className="w-4 h-4 text-green-600" />
+                          <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4 text-green-600" />
                         ) : (
-                          <ArrowDownRight className="w-4 h-4 text-red-600" />
+                          <ArrowDownRight className="w-3 h-3 sm:w-4 sm:h-4 text-red-600" />
                         )}
-                        <span className={`text-sm ${
+                        <span className={`text-xs sm:text-sm ${
                           market.trend === 'up' ? 'text-green-600' : 'text-red-600'
                         }`}>
                           {Math.abs(market.change)}%
@@ -345,43 +353,43 @@ const MarketPrices = () => {
           </div>
         </TabsContent>
 
-        <TabsContent value="trends" className="space-y-4">
+        <TabsContent value="trends" className="space-y-2 sm:space-y-4">
           <Card>
-            <CardHeader>
-              <CardTitle>Price Trends (Last 30 Days)</CardTitle>
-              <CardDescription>
+            <CardHeader className="p-3 sm:p-6">
+              <CardTitle className="text-sm sm:text-base">Price Trends (Last 30 Days)</CardTitle>
+              <CardDescription className="text-xs sm:text-sm">
                 Historical price data for {searchForm.fishType} in {searchForm.port} markets
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="text-center p-4 bg-green-50 rounded-lg">
-                    <p className="text-2xl font-bold text-green-600">₹485</p>
-                    <p className="text-sm text-green-700">Current Price</p>
+            <CardContent className="p-3 sm:p-6 pt-0 sm:pt-0">
+              <div className="space-y-2 sm:space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4">
+                  <div className="text-center p-2 sm:p-4 bg-green-50 rounded-lg">
+                    <p className="text-lg sm:text-2xl font-bold text-green-600">₹485</p>
+                    <p className="text-xs sm:text-sm text-green-700">Current Price</p>
                   </div>
-                  <div className="text-center p-4 bg-blue-50 rounded-lg">
-                    <p className="text-2xl font-bold text-blue-600">₹456</p>
-                    <p className="text-sm text-blue-700">30-Day Average</p>
+                  <div className="text-center p-2 sm:p-4 bg-blue-50 rounded-lg">
+                    <p className="text-lg sm:text-2xl font-bold text-blue-600">₹456</p>
+                    <p className="text-xs sm:text-sm text-blue-700">30-Day Average</p>
                   </div>
-                  <div className="text-center p-4 bg-orange-50 rounded-lg">
-                    <p className="text-2xl font-bold text-orange-600">+6.4%</p>
-                    <p className="text-sm text-orange-700">Price Change</p>
+                  <div className="text-center p-2 sm:p-4 bg-orange-50 rounded-lg">
+                    <p className="text-lg sm:text-2xl font-bold text-orange-600">+6.4%</p>
+                    <p className="text-xs sm:text-sm text-orange-700">Price Change</p>
                   </div>
                 </div>
                 
-                <Alert>
-                  <TrendingUp className="h-4 w-4" />
-                  <AlertDescription>
+                <Alert className="p-2 sm:p-4">
+                  <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4" />
+                  <AlertDescription className="text-xs sm:text-sm">
                     <strong>Market Insight:</strong> {searchForm.fishType} prices have been trending upward over the past week. 
                     This is a good time to sell your catch for maximum profit.
                   </AlertDescription>
                 </Alert>
                 
                 {/* Simplified price chart visualization */}
-                <div className="space-y-2">
-                  <h4 className="font-medium">Weekly Price Trend</h4>
-                  <div className="flex items-end space-x-1 h-32">
+                <div className="space-y-1 sm:space-y-2">
+                  <h4 className="font-medium text-xs sm:text-sm">Weekly Price Trend</h4>
+                  <div className="flex items-end space-x-1 h-24 sm:h-32">
                     {[420, 435, 445, 465, 485, 490, 485].map((price, index) => (
                       <div key={index} className="flex-1 bg-sky-200 rounded-t" style={{
                         height: `${(price - 400) / 100 * 100}%`,

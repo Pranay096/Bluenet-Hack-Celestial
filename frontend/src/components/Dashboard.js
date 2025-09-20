@@ -138,13 +138,13 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <div className="mx-auto max-w-7xl px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8">
         {/* Page header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">
+        <div className="mb-4 sm:mb-6 md:mb-8">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">
             Welcome back, {currentUser?.name}!
           </h1>
-          <p className="text-gray-600 mt-2">
+          <p className="text-sm sm:text-base text-gray-600 mt-1 sm:mt-2">
             {currentUser?.role === 'policymaker' 
               ? 'Monitor fishing activities and compliance across all regions'
               : 'Your smart fishing assistant powered by AI technology'
@@ -154,21 +154,23 @@ const Dashboard = () => {
 
         {/* Active alerts */}
         {dashboardData.alerts.length > 0 && (
-          <div className="mb-6">
+          <div className="mb-4 sm:mb-6">
             {dashboardData.alerts.slice(0, 2).map((alert, index) => (
-              <Alert key={index} className={`mb-2 ${
+              <Alert key={index} className={`mb-2 text-sm sm:text-base p-2 sm:p-4 ${
                 alert.severity === 'high' ? 'border-red-200 bg-red-50' :
                 alert.severity === 'medium' ? 'border-yellow-200 bg-yellow-50' :
                 'border-blue-200 bg-blue-50'
               }`}>
-                <AlertTriangle className={`h-4 w-4 ${
-                  alert.severity === 'high' ? 'text-red-600' :
-                  alert.severity === 'medium' ? 'text-yellow-600' :
-                  'text-blue-600'
-                }`} />
-                <AlertDescription className="font-medium">
-                  {alert.message}
-                </AlertDescription>
+                <div className="flex items-center gap-2">
+                  <AlertTriangle className={`h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0 ${
+                    alert.severity === 'high' ? 'text-red-600' :
+                    alert.severity === 'medium' ? 'text-yellow-600' :
+                    'text-blue-600'
+                  }`} />
+                  <AlertDescription className="font-medium">
+                    {alert.message}
+                  </AlertDescription>
+                </div>
               </Alert>
             ))}
           </div>
@@ -176,12 +178,12 @@ const Dashboard = () => {
 
         {/* Dashboard tabs */}
         <Tabs value={activeTab} onValueChange={handleTabChange} className="space-y-6">
-          <TabsList className="grid grid-cols-4 lg:grid-cols-8 w-full">
+          <TabsList className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 w-full">
             {tabs.map((tab) => {
               const IconComponent = tab.icon;
               return (
-                <TabsTrigger key={tab.id} value={tab.id} className="flex items-center gap-1 text-xs">
-                  <IconComponent className="h-3 w-3" />
+                <TabsTrigger key={tab.id} value={tab.id} className="flex items-center justify-center gap-1 py-2 text-xs">
+                  <IconComponent className="h-4 w-4 sm:h-3 sm:w-3" />
                   <span className="hidden sm:inline text-xs">{tab.label}</span>
                 </TabsTrigger>
               );
