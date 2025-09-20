@@ -178,17 +178,19 @@ const Dashboard = () => {
 
         {/* Dashboard tabs */}
         <Tabs value={activeTab} onValueChange={handleTabChange} className="space-y-6">
-          <TabsList className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 w-full">
-            {tabs.map((tab) => {
-              const IconComponent = tab.icon;
-              return (
-                <TabsTrigger key={tab.id} value={tab.id} className="flex items-center justify-center gap-1 py-2 text-xs">
-                  <IconComponent className="h-4 w-4 sm:h-3 sm:w-3" />
-                  <span className="hidden sm:inline text-xs">{tab.label}</span>
-                </TabsTrigger>
-              );
-            })}
-          </TabsList>
+          <div className="overflow-x-auto pb-2">
+            <TabsList className="inline-flex w-auto min-w-full">
+              {tabs.map((tab) => {
+                const IconComponent = tab.icon;
+                return (
+                  <TabsTrigger key={tab.id} value={tab.id} className="flex items-center justify-center gap-2 py-2 px-4 whitespace-nowrap">
+                    <IconComponent className="h-4 w-4" />
+                    <span className="text-xs">{tab.label}</span>
+                  </TabsTrigger>
+                );
+              })}
+            </TabsList>
+          </div>
 
           <TabsContent value="overview" className="space-y-6">
             {renderOverview()}

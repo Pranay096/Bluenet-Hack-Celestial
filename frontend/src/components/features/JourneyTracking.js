@@ -295,11 +295,13 @@ const JourneyTracking = () => {
       </div>
 
       <Tabs defaultValue="current" className="space-y-6">
-        <TabsList>
-          <TabsTrigger value="current">Current Journey</TabsTrigger>
-          <TabsTrigger value="history">Journey History</TabsTrigger>
-          <TabsTrigger value="map">Live Map</TabsTrigger>
-        </TabsList>
+        <div className="overflow-x-auto pb-2">
+          <TabsList className="inline-flex w-auto min-w-full">
+            <TabsTrigger value="current" className="px-4 whitespace-nowrap">Current Journey</TabsTrigger>
+            <TabsTrigger value="history" className="px-4 whitespace-nowrap">Journey History</TabsTrigger>
+            <TabsTrigger value="map" className="px-4 whitespace-nowrap">Live Map</TabsTrigger>
+          </TabsList>
+        </div>
 
         <TabsContent value="current" className="space-y-4">
           {journeyState.isActive && journeyState.currentJourney ? (

@@ -195,10 +195,12 @@ const LandingPage = ({ onLogin }) => {
                 </DialogHeader>
                 
                 <Tabs value={authMode} onValueChange={setAuthMode}>
-                  <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value="login">Login</TabsTrigger>
-                    <TabsTrigger value="register">Register</TabsTrigger>
-                  </TabsList>
+                  <div className="overflow-x-auto pb-2">
+                    <TabsList className="inline-flex w-auto min-w-full">
+                      <TabsTrigger value="login" className="px-4 whitespace-nowrap flex-1">Login</TabsTrigger>
+                      <TabsTrigger value="register" className="px-4 whitespace-nowrap flex-1">Register</TabsTrigger>
+                    </TabsList>
+                  </div>
                   
                   <form onSubmit={handleAuthSubmit} className="space-y-4 mt-4">
                     <TabsContent value="register" className="space-y-4 mt-0">

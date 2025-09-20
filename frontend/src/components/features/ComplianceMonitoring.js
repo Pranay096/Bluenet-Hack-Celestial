@@ -167,11 +167,13 @@ const ComplianceMonitoring = () => {
       </div>
 
       <Tabs defaultValue="violations" className="space-y-6">
-        <TabsList>
-          <TabsTrigger value="violations">Active Violations</TabsTrigger>
-          <TabsTrigger value="species">Species Risk</TabsTrigger>
-          <TabsTrigger value="regions">Regional Analysis</TabsTrigger>
-        </TabsList>
+        <div className="overflow-x-auto pb-2">
+          <TabsList className="inline-flex w-auto min-w-full">
+            <TabsTrigger value="violations" className="px-4 whitespace-nowrap">Active Violations</TabsTrigger>
+            <TabsTrigger value="species" className="px-4 whitespace-nowrap">Species Risk</TabsTrigger>
+            <TabsTrigger value="regions" className="px-4 whitespace-nowrap">Regional Analysis</TabsTrigger>
+          </TabsList>
+        </div>
 
         <TabsContent value="violations" className="space-y-4">
           <div className="grid gap-4">

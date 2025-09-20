@@ -366,12 +366,14 @@ const FishForecast = () => {
       )}
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid grid-cols-2 sm:grid-cols-4 w-full">
-          <TabsTrigger value="zones" className="text-xs sm:text-sm">Best Zones</TabsTrigger>
-          <TabsTrigger value="map" className="text-xs sm:text-sm">Interactive Map</TabsTrigger>
-          <TabsTrigger value="environmental" className="text-xs sm:text-sm">Environmental</TabsTrigger>
-          <TabsTrigger value="species" className="text-xs sm:text-sm">Species</TabsTrigger>
-        </TabsList>
+        <div className="overflow-x-auto pb-2">
+          <TabsList className="inline-flex w-auto min-w-full">
+            <TabsTrigger value="zones" className="text-xs sm:text-sm px-4 whitespace-nowrap">Best Zones</TabsTrigger>
+            <TabsTrigger value="map" className="text-xs sm:text-sm px-4 whitespace-nowrap">Interactive Map</TabsTrigger>
+            <TabsTrigger value="environmental" className="text-xs sm:text-sm px-4 whitespace-nowrap">Environmental</TabsTrigger>
+            <TabsTrigger value="species" className="text-xs sm:text-sm px-4 whitespace-nowrap">Species</TabsTrigger>
+          </TabsList>
+        </div>
 
         <TabsContent value="zones" className="space-y-4">
           {forecastData && (

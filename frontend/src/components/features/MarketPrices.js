@@ -207,11 +207,13 @@ const MarketPrices = () => {
       </Card>
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid grid-cols-3 w-full">
-          <TabsTrigger value="recommendation" className="text-xs sm:text-sm">Best Recommendation</TabsTrigger>
-          <TabsTrigger value="markets" className="text-xs sm:text-sm">Top Markets</TabsTrigger>
-          <TabsTrigger value="trends" className="text-xs sm:text-sm">Price Trends</TabsTrigger>
-        </TabsList>
+        <div className="overflow-x-auto pb-2">
+          <TabsList className="inline-flex w-auto min-w-full">
+            <TabsTrigger value="recommendation" className="text-xs sm:text-sm px-4 whitespace-nowrap">Best Recommendation</TabsTrigger>
+            <TabsTrigger value="markets" className="text-xs sm:text-sm px-4 whitespace-nowrap">Top Markets</TabsTrigger>
+            <TabsTrigger value="trends" className="text-xs sm:text-sm px-4 whitespace-nowrap">Price Trends</TabsTrigger>
+          </TabsList>
+        </div>
 
         <TabsContent value="recommendation" className="space-y-4">
           {marketData.recommendations && (

@@ -195,11 +195,13 @@ const PolicyAnalytics = () => {
       </div>
 
       <Tabs defaultValue="policies" className="space-y-6">
-        <TabsList>
-          <TabsTrigger value="policies">Policy Performance</TabsTrigger>
-          <TabsTrigger value="sustainability">Sustainability</TabsTrigger>
-          <TabsTrigger value="trends">Catch Trends</TabsTrigger>
-        </TabsList>
+        <div className="overflow-x-auto pb-2">
+          <TabsList className="inline-flex w-auto min-w-full">
+            <TabsTrigger value="policies" className="px-4 whitespace-nowrap">Policy Performance</TabsTrigger>
+            <TabsTrigger value="sustainability" className="px-4 whitespace-nowrap">Sustainability</TabsTrigger>
+            <TabsTrigger value="trends" className="px-4 whitespace-nowrap">Catch Trends</TabsTrigger>
+          </TabsList>
+        </div>
 
         <TabsContent value="policies" className="space-y-4">
           <div className="grid gap-4">

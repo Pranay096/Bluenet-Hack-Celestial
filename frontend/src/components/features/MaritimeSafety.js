@@ -134,7 +134,42 @@ const MaritimeSafety = () => {
     }
   };
 
-  // React-compatible animated map component
+  // VesselFinder Map component with location tracking
+  const VesselFinderMap = ({ lat, lon }) => {
+    // Create URL with location parameters - simplified parameters for better compatibility
+    const vesselFinderUrl = `https://www.vesselfinder.com/embed?zoom=12&lat=${lat}&lon=${lon}&width=800&height=600&track=true&show-track=true&mmsi=0`;
+    
+    return (
+      <div className="relative w-full h-96 rounded-lg overflow-hidden border border-gray-200">
+        <iframe 
+          src={vesselFinderUrl}
+          width="100%"
+          height="100%"
+          frameBorder="0"
+          title="VesselFinder Map"
+          className="absolute inset-0"
+          sandbox="allow-scripts allow-same-origin allow-popups"
+          referrerPolicy="no-referrer-when-downgrade"
+          loading="lazy"
+        />
+        
+        {/* Location info overlay */}
+        <div className="absolute bottom-4 left-4 right-4 bg-black bg-opacity-70 text-white px-4 py-3 rounded-lg">
+          <div className="text-center">
+            <div className="font-semibold text-sm">🧭 Live Location</div>
+            <div className="text-xs mt-1">
+              {lat.toFixed(6)}°N, {lon.toFixed(6)}°E
+            </div>
+            <div className="text-xs text-blue-200 mt-1">
+              📡 GPS Active • Auto-refresh: {autoRefresh ? '30s' : 'Off'}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+  
+  // Legacy animated map component (keeping for reference)
   const LiveLocationMap = ({ lat, lon }) => (
     <div className="relative w-full h-80 bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 rounded-lg overflow-hidden">
       {/* Animated ocean waves background */}
@@ -245,19 +280,19 @@ const MaritimeSafety = () => {
         </Card>
       )}
 
-      {/* Interactive Live Location Map */}
+      {/* VesselFinder Map */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center">
             <Navigation className="w-5 h-5 mr-2 text-blue-600" />
-            Interactive Live Location Map
+            VesselFinder Live Tracking Map
           </CardTitle>
           <CardDescription>
-            Your current position with real-time GPS tracking
+            Real-time vessel tracking with your current position
           </CardDescription>
         </CardHeader>
         <CardContent className="p-0">
-          {location && <LiveLocationMap lat={location.lat} lon={location.lon} />}
+          {location && <VesselFinderMap lat={location.lat} lon={location.lon} />}
         </CardContent>
       </Card>
 
